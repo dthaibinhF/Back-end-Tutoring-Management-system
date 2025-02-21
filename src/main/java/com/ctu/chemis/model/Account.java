@@ -31,6 +31,10 @@ public class Account {
     @Column(name = "role")
     private String Role;
 
+    @OneToOne
+    @JoinColumn(name = "account_details_id")
+    private AccountDetails accountDetails;
+
     @Column(name = "created_at")
     private Date createDt;
 

@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.sql.Date;
 import java.time.Year;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "school_year")
@@ -27,5 +29,27 @@ public class SchoolYear {
 
     @Column(name = "year_end_at")
     private Year yearEndAt;
+
+    @OneToMany(mappedBy = "schoolYear",
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+                    CascadeType.REFRESH, CascadeType.DETACH})
+    private List<Grade> grades;
+
+
+    //add convenience method for bi-directional relationship
+
+    public void add(Grade tempGrade) {
+
+        //check if list grades exist
+        if ((grades == null)) {
+            //if dont exist, create new list
+            grades = new ArrayList<>();
+        }
+        //add grade to list
+        grades.add(tempGrade);
+        //set school year for grade
+        tempGrade.setSchoolYear(this);
+    }
 
 }
