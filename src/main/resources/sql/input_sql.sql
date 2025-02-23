@@ -9,8 +9,13 @@ INSERT INTO account_details (account_type)
 VALUES ('STUDENT');
 
 INSERT INTO account_details (account_type)
+VALUES ('STUDENT');
+
+INSERT INTO account_details (account_type)
 VALUES ('TEACHER');
 
+
+########################student account########################
 INSERT INTO account (name, email, mobile_number, pwd, role, created_at, account_details_id)
 VALUES ('Đặng Thái Bình', 'dthaibinh03@gmail.com', '0939464077', '{noop}Dthaibinh@1234', 'ADMIN',
         '2025-02-10', 1);
@@ -29,6 +34,12 @@ INSERT INTO account (name, email, mobile_number, pwd, role, created_at, account_
 VALUES ('Bùi Gia Mỹ', 'my@gmail.com', '0987654321',
         '{bcrypt}$2a$12$HRPpgmQ2SuIbf1HfJEMXGeSlmHQ7SgucyVTJSpZXJXYT6PMFlJJES',
         'USER', '2025-02-20', 4); #Kimngan@1234
+
+########################teacher account########################
+INSERT INTO account (name, email, mobile_number, pwd, role, created_at, account_details_id)
+VALUES ('Nguyễn Hoàng Trung', 'trung@gmail.com', '0333098311',
+        '{bcrypt}$2a$12$HRPpgmQ2SuIbf1HfJEMXGeSlmHQ7SgucyVTJSpZXJXYT6PMFlJJES',
+        'USER', '2025-02-21', 5); #Kimngan@1234
 
 INSERT INTO authority (name, account_id)
 VALUES ('ROLE_ADMIN', 1);
@@ -65,7 +76,6 @@ VALUES ('Truong THPT An Khánh');
 
 INSERT INTO school (school_name)
 VALUES ('Truong THPT Bình Minh');
-
 
 INSERT INTO school (school_name)
 VALUES ('Truong THPT Nguyễn Bỉnh Khiêm');

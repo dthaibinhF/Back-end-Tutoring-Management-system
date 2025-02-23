@@ -32,8 +32,6 @@ DROP TABLE IF EXISTS teacher;
 
 DROP TABLE IF EXISTS account_details;
 
-
-
 CREATE TABLE `account`
 (
     `id`                 INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -56,12 +54,12 @@ CREATE TABLE `authority`
 CREATE TABLE `account_details`
 (
     `id`           INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    `account_type` VARCHAR(50) NOT NULL
+    `account_type` VARCHAR(50)     NOT NULL
 );
 
 CREATE TABLE `roll_call`
 (
-    `name` VARCHAR(50) NOT NULL,
+    `name`             VARCHAR(50) NOT NULL,
     `student_id`       INT         NOT NULL,
     `class_id`         INT         NOT NULL COMMENT 'student''s main class',
     `at_date`          DATE        NOT NULL,
@@ -94,7 +92,7 @@ CREATE TABLE `class`
 CREATE TABLE `school`
 (
     `id`          INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    `school_name` NVARCHAR(50) NOT NULL
+    `school_name` NVARCHAR(50)    NOT NULL
 );
 
 CREATE TABLE `period_time`
@@ -141,7 +139,7 @@ CREATE TABLE `score`
 (
     `id`         INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `student_id` INT             NOT NULL,
-    `name` NVARCHAR(50) NOT NULL,
+    `name`       NVARCHAR(50)    NOT NULL,
     `score`      DECIMAL(5, 2)   NOT NULL
 );
 
