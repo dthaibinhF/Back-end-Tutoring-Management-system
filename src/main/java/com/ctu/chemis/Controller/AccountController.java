@@ -26,4 +26,22 @@ public class AccountController {
         return accountRepository.findAll();
     }
 
+    @PutMapping("/update")
+    public Account updateAccount(@RequestBody Account account) {
+        return accountRepository.save(account);
+    }
+
+    @DeleteMapping("/{accountId}")
+    public void deleteAccount(@PathVariable long accountId) {
+        Account account = accountRepository.findById(accountId);
+
+        // throw exception if null
+
+        if (account == null) {
+            throw new RuntimeException("Employee id not found - " + accountId);
+        }
+
+        accountRepository.delete(account);
+    }
+
 }

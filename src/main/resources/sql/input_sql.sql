@@ -16,30 +16,30 @@ VALUES ('TEACHER');
 
 
 ########################student account########################
-INSERT INTO account (name, email, mobile_number, pwd, role, created_at, account_details_id)
-VALUES ('Đặng Thái Bình', 'dthaibinh03@gmail.com', '0939464077', '{noop}Dthaibinh@1234', 'ADMIN',
+INSERT INTO account (name, email, mobile_number, pwd, created_at, account_details_id)
+VALUES ('Đặng Thái Bình', 'dthaibinh03@gmail.com', '0939464077', '{noop}Dthaibinh@1234',
         '2025-02-10', 1);
 
-INSERT INTO account (name, email, mobile_number, pwd, role, created_at, account_details_id)
+INSERT INTO account (name, email, mobile_number, pwd, created_at, account_details_id)
 VALUES ('Trần Phi Nhựt', 'nhut@gmail.com', '0927921129',
-        '{bcrypt}$2a$12$KBdErJidVwMvzqN/mlQQVurMueux6oaT0t1KXQkfFTn98QYDVP6Jm',
-        'ADMIN', '2025-02-20', 2); #Phinhut@1234
+        '{bcrypt}$2a$12$KBdErJidVwMvzqN/mlQQVurMueux6oaT0t1KXQkfFTn98QYDVP6Jm', '2025-02-20', 2); #Phinhut@1234
 
-INSERT INTO account (name, email, mobile_number, pwd, role, created_at, account_details_id)
+INSERT INTO account (name, email, mobile_number, pwd, created_at, account_details_id)
 VALUES ('Phan Tấn Phát', 'phat@gmail.com', '0123456789',
         '{bcrypt}$2a$12$aWEDx6JpvXScPRVk7cTxkeKh4e5qxQsk91wGtS.KVS2/L0/AcU.B2',
-        'USER', '2025-02-20', 3); #Tanphat@1234
+        '2025-02-20', 3); #Tanphat@1234
 
-INSERT INTO account (name, email, mobile_number, pwd, role, created_at, account_details_id)
+INSERT INTO account (name, email, mobile_number, pwd, created_at, account_details_id)
 VALUES ('Bùi Gia Mỹ', 'my@gmail.com', '0987654321',
         '{bcrypt}$2a$12$HRPpgmQ2SuIbf1HfJEMXGeSlmHQ7SgucyVTJSpZXJXYT6PMFlJJES',
-        'USER', '2025-02-20', 4); #Kimngan@1234
+        '2025-02-20', 4);
+#Kimngan@1234
 
 ########################teacher account########################
-INSERT INTO account (name, email, mobile_number, pwd, role, created_at, account_details_id)
+INSERT INTO account (name, email, mobile_number, pwd, created_at, account_details_id)
 VALUES ('Nguyễn Hoàng Trung', 'trung@gmail.com', '0333098311',
         '{bcrypt}$2a$12$HRPpgmQ2SuIbf1HfJEMXGeSlmHQ7SgucyVTJSpZXJXYT6PMFlJJES',
-        'USER', '2025-02-21', 5); #Kimngan@1234
+        '2025-02-21', 5); #Kimngan@1234
 
 INSERT INTO authority (name, account_id)
 VALUES ('ROLE_ADMIN', 1);
@@ -52,6 +52,9 @@ VALUES ('ROLE_STUDENT', 3);
 
 INSERT INTO authority (name, account_id)
 VALUES ('ROLE_TEACHER', 4);
+
+INSERT INTO authority (name, account_id)
+VALUES ('ROLE_TEACHER', 5);
 
 #####################################
 ########School#########

@@ -39,7 +39,6 @@ CREATE TABLE `account`
     `email`              VARCHAR(50)     NOT NULL,
     `mobile_number`      VARCHAR(10)     NOT NULL,
     `pwd`                VARCHAR(200)    NOT NULL,
-    `role`               VARCHAR(50)     NOT NULL COMMENT 'user - admin',
     `account_details_id` INT             NOT NULL,
     `created_at`         DATE            NOT NULL
 );
