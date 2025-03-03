@@ -52,8 +52,8 @@ CREATE TABLE `authority`
 
 CREATE TABLE `account_details`
 (
-    `id`           INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    `account_type` VARCHAR(50)     NOT NULL
+    `id`      INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `address` NVARCHAR(500)
 );
 
 CREATE TABLE `roll_call`

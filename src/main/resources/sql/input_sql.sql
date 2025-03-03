@@ -1,18 +1,18 @@
 ########Account#########
-INSERT INTO account_details (account_type)
-VALUES ('ADMIN');
+INSERT INTO account_details (address)
+VALUES ('Cần Thơ, Việt Nam');
 
-INSERT INTO account_details (account_type)
-VALUES ('ADMIN');
+INSERT INTO account_details (address)
+VALUES ('Hồ Chí Minh, Việt Nam');
 
-INSERT INTO account_details (account_type)
-VALUES ('STUDENT');
+INSERT INTO account_details (address)
+VALUES ('Tiền Giang, Việt Nam');
 
-INSERT INTO account_details (account_type)
-VALUES ('STUDENT');
+INSERT INTO account_details (address)
+VALUES ('Cái Bè, Việt Nam');
 
-INSERT INTO account_details (account_type)
-VALUES ('TEACHER');
+INSERT INTO account_details (address)
+VALUES ('Hậu Giang, Việt Nam');
 
 
 ########################student account########################
