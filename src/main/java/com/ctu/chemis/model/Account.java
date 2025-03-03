@@ -1,17 +1,23 @@
 package com.ctu.chemis.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "account")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id",
+        scope = Account.class)
 public class Account {
 
     @Id
@@ -42,7 +48,6 @@ public class Account {
     @OneToMany(mappedBy = "account",
             cascade = {CascadeType.ALL},
             fetch = FetchType.EAGER)
-    @JsonManagedReference
     private List<Authority> authorities;
 
     @Override
@@ -59,14 +64,14 @@ public class Account {
                 '}';
     }
 
-//    //add convince method
-//    public void add(Authority tempAuthority) {
-//        if (authorities == null) {
-//            authorities = new ArrayList<>();
-//        } else {
-//            authorities.add(tempAuthority);
-//        }
-//        tempAuthority.setAccount(this);
-//    }
+    //add convince method
+    public void add(Authority tempAuthority) {
+        if (authorities == null) {
+            authorities = new ArrayList<>();
+        } else {
+            authorities.add(tempAuthority);
+        }
+        tempAuthority.setAccount(this);
+    }
 
 }
