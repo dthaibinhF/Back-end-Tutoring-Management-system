@@ -4,31 +4,45 @@ import com.ctu.chemis.Repository.AccountDetailsRepository;
 import com.ctu.chemis.model.AccountDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/v1/account/details")
+@RequestMapping("/v1/account-details")
 @RequiredArgsConstructor
 public class AccountDetailsController {
 
-    private AccountDetailsRepository accountDetailsRepository;
+    private final AccountDetailsRepository accountDetailsRepository;
 
-    @RequestMapping("/all")
-    public List<AccountDetails> getAccountDetails() {
+    @GetMapping("/all")
+    public List<AccountDetails> getAllAccountDetails() {
         return accountDetailsRepository.findAll();
     }
 
     @RequestMapping("/{accountId}")
     public AccountDetails getAccountDetails(@PathVariable long accountId) {
-        AccountDetails accountDetails = accountDetailsRepository.findByAccountId(accountId).orElseThrow(
+        return accountDetailsRepository.findByAccountId(accountId).orElseThrow(
                 () -> new UsernameNotFoundException("user details not found for the user with id: " + accountId)
         );
-        return accountDetails;
+    }
+
+    @PutMapping("/{accountDetailsId}")
+    public AccountDetails updateAccountDetails(@RequestBody AccountDetails accountDetails, @PathVariable long accountDetailsId) {
+
+        Optional<AccountDetails> optAccountDetails = accountDetailsRepository.findById(accountDetailsId);
+
+        if (optAccountDetails.isPresent()) {
+            if (accountDetails.getId() == accountDetailsId) {
+                return accountDetailsRepository.save(accountDetails);
+            } else {
+                throw new RuntimeException("Account details id mismatch - " + accountDetailsId);
+            }
+        } else {
+            throw new RuntimeException("Account details not found - " + accountDetailsId);
+        }
     }
 
 

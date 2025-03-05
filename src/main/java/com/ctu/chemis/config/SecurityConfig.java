@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.password.CompromisedPasswordChecker;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -20,8 +21,8 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/register", "/error").permitAll()
-                        .requestMatchers("/test","/v1/account/**", "/V1/grade/**").authenticated())
-                .csrf(csrf -> csrf.disable())
+                        .requestMatchers("/v1/**").authenticated())
+                .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(withDefaults())
                 .formLogin(withDefaults());
 

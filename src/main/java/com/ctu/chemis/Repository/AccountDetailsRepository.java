@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface AccountDetailsRepository extends JpaRepository<AccountDetails, Long> {
-    AccountDetails findById(long accountId);
+    Optional<AccountDetails> findById(long accountDetailsId);
     Optional<AccountDetails> findByAccountId(long accountId);
 }
