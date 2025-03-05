@@ -36,7 +36,6 @@ public class UserController {
 
             Account savedCustomer = accountRepository.save(account); // save the user
 
-
             if (savedCustomer.getId() > 0) { // if the id is greater than 0, it means account save successfully
                 return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
             } else {
