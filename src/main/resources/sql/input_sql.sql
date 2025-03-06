@@ -93,14 +93,24 @@ VALUES ('2024-09-05', '2025-05-31', '2024', '2025');
 ##############################################################
 
 #############grade############
-INSERT INTO grade (grade, school_year_id)
+INSERT INTO grade (grade)
+VALUES (10);
+
+INSERT INTO grade (grade)
+VALUES (11);
+
+INSERT INTO grade (grade)
+VALUES (12);
+
+############school_year_grade############
+INSERT INTO school_year_grade (grade_id, school_year_id)
 VALUES (10, 1);
 
-INSERT INTO grade (grade, school_year_id)
+INSERT INTO school_year_grade (grade_id, school_year_id)
 VALUES (11, 1);
-
-INSERT INTO grade (grade, school_year_id)
+INSERT INTO school_year_grade (grade_id, school_year_id)
 VALUES (12, 1);
+
 ##############################################################
 
 #############period_time############
@@ -233,22 +243,22 @@ VALUES ('sunday-6', 'sunday', '19:20:00', '21:00:00');
 ##############################################################
 #############class############
 INSERT INTO class (name, type, grade, max_student)
-VALUES ('12N1', 'NORMAL', 3, 50);
+VALUES ('12N1', 'NORMAL', 12, 50);
 
 INSERT INTO class (name, type, grade, max_student)
-VALUES ('12N2', 'NORMAL', 3, 50);
+VALUES ('12N2', 'NORMAL', 12, 50);
 
 INSERT INTO class (name, type, grade, max_student)
-VALUES ('12N3', 'NORMAL', 3, 50);
+VALUES ('12N3', 'NORMAL', 12, 50);
 
 INSERT INTO class (name, type, grade, max_student)
-VALUES ('12NC1', 'NORMAL', 3, 50);
+VALUES ('12NC1', 'NORMAL', 12, 50);
 
 INSERT INTO class (name, type, grade, max_student)
-VALUES ('12NC2', 'NORMAL', 3, 50);
+VALUES ('12NC2', 'NORMAL', 12, 50);
 
 INSERT INTO class (name, type, grade, max_student)
-VALUES ('12V1', 'NORMAL', 3, 50);
+VALUES ('12V1', 'NORMAL', 12, 50);
 
 ##############################################################
 #############period_time_class############
@@ -325,12 +335,12 @@ VALUES ('lớp 10 Học kỳ 2', 2000000, '2025-01-01', '2025-04-30');
 INSERT INTO student (account_details_id, school_id,
                      class_id, grade_id, start_learning_at,
                      stop_learning_at, enable)
-VALUES (3, 6, 1, 3, '2025-01-01', '2025-04-30', 1);
+VALUES (3, 6, 1, 12, '2025-01-01', '2025-04-30', 1);
 
 INSERT INTO student (account_details_id, school_id,
                      class_id, grade_id, start_learning_at,
                      stop_learning_at, enable)
-VALUES (4, 2, 4, 3, '2025-01-01', '2025-04-30', 1);
+VALUES (4, 2, 4, 12, '2025-01-01', '2025-04-30', 1);
 
 ############################################################
 #############score############

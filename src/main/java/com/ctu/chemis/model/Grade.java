@@ -4,10 +4,16 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "grade")
 @Getter
 @Setter
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "id",
+//        scope = Grade.class)
 public class Grade {
 
     @Id
@@ -17,10 +23,13 @@ public class Grade {
     @Column(name = "grade")
     private int grade;
 
-    @ManyToOne(fetch = FetchType.LAZY,
+    @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE,
                     CascadeType.REFRESH, CascadeType.DETACH})
-    @JoinColumn(name = "school_year_id")
-    private SchoolYear schoolYear;
+    @JoinTable(name = "school_year_grade",
+            joinColumns = @JoinColumn(name = "grade_id"),
+            inverseJoinColumns = @JoinColumn(name = "school_year_id")
+    )
+    private List<SchoolYear> schoolYears;
 
 }
