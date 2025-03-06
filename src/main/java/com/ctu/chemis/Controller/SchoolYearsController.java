@@ -1,14 +1,16 @@
 package com.ctu.chemis.Controller;
 
+import com.ctu.chemis.Repository.GradeRepository;
 import com.ctu.chemis.Repository.SchoolYearsRepository;
 import com.ctu.chemis.model.Grade;
 import com.ctu.chemis.model.SchoolYear;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,6 +19,7 @@ import java.util.List;
 public class SchoolYearsController {
 
     private final SchoolYearsRepository schoolYearsRepository;
+    private final GradeRepository gradeRepository;
 
     @GetMapping("/all")
     public List<SchoolYear> getAllSchoolYears() {
@@ -34,26 +37,39 @@ public class SchoolYearsController {
     @GetMapping("/current")
     public SchoolYear getCurrentSchoolYear() {
 
-        Date currentDate = new Date(System.currentTimeMillis());
+        LocalDate currentDate = new Date(System.currentTimeMillis()).toLocalDate();
         return schoolYearsRepository.findCurrentSchoolYear(currentDate).orElseThrow(
                 () -> new RuntimeException("No school year found")
         );
     }
 
     //waiting for the front end to send the data
-    @PostMapping("/add")
-    public ResponseEntity<String> addSchoolYear(@RequestBody SchoolYear schoolYear) {
+    @PostMapping(value = "/add", consumes = "application/json")
+    public SchoolYear addSchoolYear(@RequestBody SchoolYear schoolYear) {
 
         schoolYear.setId(0);
-        List<Grade> grades = schoolYear.getGrades();
-        grades.forEach(grade -> grade.setSchoolYear(schoolYear));
+        List<Grade> grades = gradeRepository.findAll();
+        schoolYear.setGrades(grades);
+        grades.forEach(grade -> {
+            List<SchoolYear> schoolYears = new ArrayList<>();
+            if (grade.getSchoolYears() != null) {
+                schoolYears = grade.getSchoolYears();
+            }
+            schoolYears.add(schoolYear);
+            grade.setSchoolYears(schoolYears);
+        });
         SchoolYear saveSchoolYear = schoolYearsRepository.save(schoolYear);
 
         if (saveSchoolYear.getId() > 0) {
-            return ResponseEntity.status(HttpStatus.CREATED).body("School year added successfully");
+            return saveSchoolYear;
         } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("School year added failed");
+            throw new RuntimeException("school year added failed");
         }
+    }
+
+    @PostMapping("/test")
+    public ResponseEntity<String> test(@RequestBody String body) {
+        return ResponseEntity.ok("Received: " + body);
     }
 
 
