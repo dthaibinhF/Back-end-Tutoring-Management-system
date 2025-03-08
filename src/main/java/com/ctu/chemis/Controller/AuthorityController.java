@@ -1,8 +1,8 @@
 package com.ctu.chemis.Controller;
 
 
-import com.ctu.chemis.Repository.AuthorityRepository;
-import com.ctu.chemis.model.Authority;
+import com.ctu.chemis.DTO.AuthorityDTO;
+import com.ctu.chemis.Service.AuthorityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,21 +12,21 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/v1/authority")
 public class AuthorityController {
-    private final AuthorityRepository authorityRepository;
+    private final AuthorityService authorityService;
 
     @GetMapping("/all")
-    public List<Authority> getAllAuthority() {
-        return authorityRepository.findAll();
+    public List<AuthorityDTO> getAllAuthority() {
+        return authorityService.getAllAccountDetails();
     }
 
     @GetMapping("/{authorityId}")
-    public Authority getAuthority(@PathVariable long authorityId) {
-        return authorityRepository.findById(authorityId);
+    public AuthorityDTO getAuthority(@PathVariable long authorityId) {
+        return authorityService.getAuthorityBy(authorityId);
     }
 
-    @PutMapping("/update")
-    public Authority updateAuthority(@RequestBody Authority authority) {
-        return authorityRepository.save(authority);
+    @PutMapping("/{authorityId}")
+    public AuthorityDTO updateAuthority(@RequestBody AuthorityDTO authorityDTO, @PathVariable long authorityId) {
+        return authorityService.update(authorityDTO, authorityId);
     }
 
 }

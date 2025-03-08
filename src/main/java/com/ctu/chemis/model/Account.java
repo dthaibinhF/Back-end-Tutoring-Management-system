@@ -1,22 +1,16 @@
 package com.ctu.chemis.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "account")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id",
-        scope = Account.class)
 public class Account {
 
     @Id
@@ -36,18 +30,23 @@ public class Account {
     @Column(name = "pwd")
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
     // cascade all because if we delete account, we want to delete account details as well
     @JoinColumn(name = "account_details_id")
     private AccountDetails accountDetails;
 
     @Column(name = "created_at")
-    private Date createDt;
+    private LocalDate createDt;
 
-    @OneToMany(mappedBy = "account",
-            cascade = {CascadeType.ALL},
-            fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "account_authority",
+            joinColumns = @JoinColumn(name = "account_id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id")
+    )
     private List<Authority> authorities;
+
 
     @Override
     public String toString() {
@@ -63,14 +62,5 @@ public class Account {
                 '}';
     }
 
-    //add convince method
-//    public void add(Authority tempAuthority) {
-//        if (authorities == null) {
-//            authorities = new ArrayList<>();
-//        } else {
-//            authorities.add(tempAuthority);
-//        }
-//        tempAuthority.setAccount(this);
-//    }
 
 }

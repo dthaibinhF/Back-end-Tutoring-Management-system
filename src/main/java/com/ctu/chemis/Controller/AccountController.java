@@ -1,55 +1,46 @@
 package com.ctu.chemis.Controller;
 
-import com.ctu.chemis.Repository.AccountRepository;
-import com.ctu.chemis.model.Account;
+import com.ctu.chemis.DTO.AccountDTO;
+import com.ctu.chemis.Service.AccountService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/account")
 public class AccountController {
 
-    private final AccountRepository accountRepository;
+    private final AccountService accountService;
 
     @GetMapping("/{accountId}")
-    public Account getAccount(@PathVariable long accountId) {
-        Optional<Account> account = accountRepository.findById(accountId);
-        if (account.isPresent()) {
-            return account.get();
-        } else {
-            throw new RuntimeException("Account not found - " + accountId);
-        }
+    public ResponseEntity<AccountDTO> getAccount(@PathVariable long accountId) {
+        return ResponseEntity.ok(accountService.getAccountBy(accountId));
     }
 
     @GetMapping("/all")
-    public List<Account> getAccounts() {
-        return accountRepository.findAll();
+    public ResponseEntity<List<AccountDTO>> getAccounts() {
+        return ResponseEntity.ok(accountService.getAllAccounts());
     }
 
     @PutMapping("/{accountID}")
-    public Account updateAccount(@RequestBody Account account, @PathVariable long accountID) {
-        Optional<Account> optAccount = accountRepository.findById(accountID);
-
-        if (optAccount.isPresent()) {
-            return accountRepository.save(account);
-        } else {
-            throw new RuntimeException("Account not found - " + accountID);
-        }
+    public ResponseEntity<AccountDTO> updateAccount(@RequestBody AccountDTO accountDTO, @PathVariable long accountID) {
+        return ResponseEntity.ok(accountService.updateAccount(accountDTO, accountID));
     }
 
     @DeleteMapping("/{accountId}")
-    public void deleteAccount(@PathVariable long accountId) {
-        Optional<Account> account = accountRepository.findById(accountId);
-        if (account.isPresent()) {
-            accountRepository.delete(account.get());
+    public ResponseEntity<String> deleteAccount(@PathVariable long accountId) {
+        AccountDTO accountDTO = accountService.getAccountBy(accountId);
+        if (accountDTO != null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Account id: " + accountId + " not found");
         } else {
-            throw new RuntimeException("Account not found - " + accountId);
-        }
+            accountService.deleteAccount(accountId);
+            return ResponseEntity.status(HttpStatus.OK).body("Account with id: " + accountId + " deleted successfully");
 
+        }
     }
 
 }
