@@ -1,16 +1,11 @@
 package com.ctu.chemis.Controller;
 
-import com.ctu.chemis.Repository.GradeRepository;
-import com.ctu.chemis.Repository.SchoolYearsRepository;
-import com.ctu.chemis.model.Grade;
-import com.ctu.chemis.model.SchoolYear;
+import com.ctu.chemis.DTO.SchoolYearDTO;
+import com.ctu.chemis.Service.SchoolYearService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,59 +13,27 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SchoolYearsController {
 
-    private final SchoolYearsRepository schoolYearsRepository;
-    private final GradeRepository gradeRepository;
+    private final SchoolYearService schoolYearService;
 
     @GetMapping("/all")
-    public List<SchoolYear> getAllSchoolYears() {
-        return schoolYearsRepository.findAll();
+    public ResponseEntity<List<SchoolYearDTO>> getAllSchoolYears() {
+        return ResponseEntity.ok(schoolYearService.getAllSchoolYears());
     }
 
     @GetMapping("/{schoolYearsId}")
-    public SchoolYear getSingleSchoolYear(@PathVariable long schoolYearsId) {
-
-        return schoolYearsRepository.findById(schoolYearsId).orElseThrow(
-                () -> new RuntimeException("School year not found - " + schoolYearsId)
-        );
+    public ResponseEntity<SchoolYearDTO> getSingleSchoolYear(@PathVariable long schoolYearsId) {
+        return ResponseEntity.ok(schoolYearService.getSchoolYearBy(schoolYearsId));
     }
 
     @GetMapping("/current")
-    public SchoolYear getCurrentSchoolYear() {
-
-        LocalDate currentDate = new Date(System.currentTimeMillis()).toLocalDate();
-        return schoolYearsRepository.findCurrentSchoolYear(currentDate).orElseThrow(
-                () -> new RuntimeException("No school year found")
-        );
+    public ResponseEntity<SchoolYearDTO> getCurrentSchoolYear() {
+        return ResponseEntity.ok(schoolYearService.getCurrentSchoolYear());
     }
 
     //waiting for the front end to send the data
-    @PostMapping(value = "/add", consumes = "application/json")
-    public SchoolYear addSchoolYear(@RequestBody SchoolYear schoolYear) {
-
-        schoolYear.setId(0);
-        List<Grade> grades = gradeRepository.findAll();
-        schoolYear.setGrades(grades);
-        grades.forEach(grade -> {
-            List<SchoolYear> schoolYears = new ArrayList<>();
-            if (grade.getSchoolYears() != null) {
-                schoolYears = grade.getSchoolYears();
-            }
-            schoolYears.add(schoolYear);
-            grade.setSchoolYears(schoolYears);
-        });
-        SchoolYear saveSchoolYear = schoolYearsRepository.save(schoolYear);
-
-        if (saveSchoolYear.getId() > 0) {
-            return saveSchoolYear;
-        } else {
-            throw new RuntimeException("school year added failed");
-        }
+    @PostMapping(value = "/add")
+    public ResponseEntity<SchoolYearDTO> addSchoolYear(@RequestBody SchoolYearDTO schoolYearDTO) {
+        return ResponseEntity.ok(schoolYearService.createSchoolYear(schoolYearDTO));
     }
-
-    @PostMapping("/test")
-    public ResponseEntity<String> test(@RequestBody String body) {
-        return ResponseEntity.ok("Received: " + body);
-    }
-
 
 }

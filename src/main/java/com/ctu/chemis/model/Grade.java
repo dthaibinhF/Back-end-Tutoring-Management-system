@@ -32,4 +32,8 @@ public class Grade {
     )
     private List<SchoolYear> schoolYears;
 
+    @OneToMany(mappedBy = "grade",
+            fetch = FetchType.LAZY)
+    private List<Student> students;
+
 }

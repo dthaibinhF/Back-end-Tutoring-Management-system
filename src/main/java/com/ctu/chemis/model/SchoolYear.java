@@ -34,9 +34,7 @@ public class SchoolYear {
     private Integer yearEndAt;
 
     @ManyToMany(mappedBy = "schoolYears",
-            fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-                    CascadeType.REFRESH, CascadeType.DETACH})
+            fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Grade> grades;
 

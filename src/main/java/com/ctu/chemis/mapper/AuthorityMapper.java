@@ -8,8 +8,6 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring", uses = {AccountMapper.class})
 public interface AuthorityMapper {
     Authority toAuthority(AuthorityDTO authorityDTO);
-
     AuthorityDTO toAuthorityDTO(Authority authority);
-
     void updateAccountDetailsFromDTO(@MappingTarget Authority authority, AuthorityDTO authorityDTO);
 }
