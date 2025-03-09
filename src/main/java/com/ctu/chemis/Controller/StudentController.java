@@ -1,11 +1,10 @@
 package com.ctu.chemis.Controller;
 
-import com.ctu.chemis.Repository.StudentRepository;
-import com.ctu.chemis.model.Student;
+import com.ctu.chemis.DTO.StudentDTO;
+import com.ctu.chemis.Service.StudentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,11 +13,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudentController {
 
-    private final StudentRepository studentRepository;
+    private final StudentService studentService;
 
     @GetMapping("/all")
-    public List<Student> getAllStudent() {
-        return studentRepository.findAll();
+    public ResponseEntity<List<StudentDTO>> getAllStudent() {
+        return ResponseEntity.ok(studentService.getAllStudents());
     }
+
+    @GetMapping("/{studentId}")
+    public ResponseEntity<StudentDTO> getStudentById(@PathVariable long studentId) {
+        return ResponseEntity.ok(studentService.getStudentBy(studentId));
+    }
+
+    @PutMapping("/{studentId}")
+    public ResponseEntity<StudentDTO> updateStudent(@RequestBody StudentDTO studentDTO, @PathVariable long studentId) {
+        return ResponseEntity.ok(studentService.updateStudent(studentDTO, studentId));
+    }
+
+
 
 }

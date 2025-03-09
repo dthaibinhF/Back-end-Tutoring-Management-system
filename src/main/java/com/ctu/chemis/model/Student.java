@@ -29,7 +29,10 @@ public class Student {
     @JoinColumn(name = "school_id")
     private School school;
 
-
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH},
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "grade_id")
+    private Grade grade;
 
 
 }
