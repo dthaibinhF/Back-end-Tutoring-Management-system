@@ -3,18 +3,19 @@ package com.ctu.chemis.DTO;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-/**
- * DTO for {@link com.ctu.chemis.model.Student}
- */
+import java.math.BigDecimal;
 
+/**
+ * DTO for {@link com.ctu.chemis.model.Score}
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class StudentDTO {
+public class ScoreDTO {
     long id;
-    AccountDTO account;
-    SchoolDTO school;
-    GradeDTO grade;
+    String name;
+    BigDecimal score;
+    StudentDTO student;
 }

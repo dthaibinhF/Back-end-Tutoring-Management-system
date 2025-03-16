@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "student")
 @Getter
@@ -21,19 +23,22 @@ public class Student {
     @Column(name = "id")
     private long id;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "account_details_id")
-    private AccountDetails accountDetails;
 
     @ManyToOne
     @JoinColumn(name = "school_id")
     private School school;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH},
-            fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "grade_id")
     private Grade grade;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+    @OneToMany(mappedBy = "student",
+            fetch = FetchType.EAGER)
+    private List<Score> scores;
 
 }
 

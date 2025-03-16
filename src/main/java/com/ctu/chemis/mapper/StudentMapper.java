@@ -9,8 +9,6 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring")
 public interface StudentMapper {
     StudentDTO toStudentDTO(Student student);
-
     Student toStudent(StudentDTO studentDTO);
-
     void updateStudentFromDTO(@MappingTarget Student student, StudentDTO studentDTO);
 }

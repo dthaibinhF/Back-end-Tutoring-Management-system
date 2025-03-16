@@ -41,14 +41,6 @@ public class AccountService {
             //set create date
             account.setCreateDt(new Date(System.currentTimeMillis()).toLocalDate());
             Account savedAccount = accountRepository.save(account);
-            // Ensure authorities are new and linked to account
-//            List<Authority> authorities = account.getAuthorities();
-//            authorities.forEach(
-//                    authority -> {
-//                        authority.setAccount(account);
-//                    }
-//            );
-//            account.setAuthorities(authorities);
 
             if (savedAccount.getId() > 0) { // if the id is greater than 0, it means account save successfully
                 return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");

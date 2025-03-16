@@ -4,7 +4,6 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
-import java.util.List;
 
 /**
  * DTO for {@link com.ctu.chemis.model.SchoolYear}
@@ -21,5 +20,5 @@ public class SchoolYearDTO {
     LocalDate endAt;
     Integer yearStartAt;
     Integer yearEndAt;
-    List<GradeDTO> grades;
+//    List<GradeDTO> grades;
 }

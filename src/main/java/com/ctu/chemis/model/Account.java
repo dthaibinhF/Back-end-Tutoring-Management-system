@@ -47,6 +47,9 @@ public class Account {
     )
     private List<Authority> authorities;
 
+    @OneToOne(mappedBy = "account")
+    private Student student;
+
 
     @Override
     public String toString() {

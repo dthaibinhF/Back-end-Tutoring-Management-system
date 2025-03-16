@@ -31,6 +31,18 @@ public class StudentService {
         );
     }
 
+    //
+    public StudentDTO createStudent(StudentDTO studentDTO) {
+
+        //convert studentDTO to student
+        Student student = studentMapper.toStudent(studentDTO);
+        //set id to 0 to avoid id conflict
+        student.setId(0);
+        //save student to database
+
+        return studentMapper.toStudentDTO(studentRepository.save(student));
+    }
+
     @Transactional
     public StudentDTO updateStudent(StudentDTO studentDTO, long studentId) {
 
