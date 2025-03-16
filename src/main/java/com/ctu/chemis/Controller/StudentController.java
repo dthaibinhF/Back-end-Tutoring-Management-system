@@ -30,5 +30,8 @@ public class StudentController {
         return ResponseEntity.ok(studentService.updateStudent(studentDTO, studentId));
     }
 
-
+    @PostMapping("/add")
+    public ResponseEntity<StudentDTO> createStudent(@RequestBody StudentDTO studentDTO) {
+        return ResponseEntity.ok(studentService.createStudent(studentDTO));
+    }
 }

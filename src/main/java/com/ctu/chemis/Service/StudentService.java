@@ -4,7 +4,6 @@ import com.ctu.chemis.DTO.StudentDTO;
 import com.ctu.chemis.Repository.StudentRepository;
 import com.ctu.chemis.mapper.StudentMapper;
 import com.ctu.chemis.model.Student;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -39,18 +38,16 @@ public class StudentService {
         //set id to 0 to avoid id conflict
         student.setId(0);
         //save student to database
-
         return studentMapper.toStudentDTO(studentRepository.save(student));
     }
 
-    @Transactional
     public StudentDTO updateStudent(StudentDTO studentDTO, long studentId) {
 
         Student student = studentRepository.findById(studentId).orElseThrow(
                 () -> new RuntimeException("Student id not found: " + studentId)
         );
 
-        if (student.getSchool().getId() != studentDTO.getSchool().getId()) {
+        if (student.getId() != studentDTO.getId()) {
             throw new RuntimeException("School id mismatch");
         }
 
