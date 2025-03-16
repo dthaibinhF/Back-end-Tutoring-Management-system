@@ -2,7 +2,6 @@ package com.ctu.chemis.Service;
 
 import com.ctu.chemis.DTO.ScoreDTO;
 import com.ctu.chemis.Repository.ScoreRepository;
-import com.ctu.chemis.Repository.StudentRepository;
 import com.ctu.chemis.mapper.ScoreMapper;
 import com.ctu.chemis.model.Score;
 import jakarta.transaction.Transactional;
@@ -18,7 +17,6 @@ public class ScoreService {
 
     private final ScoreMapper scoreMapper;
     private final ScoreRepository scoreRepository;
-    private final StudentRepository studentRepository;
 
     public List<ScoreDTO> getAllScores() {
         return scoreRepository.findAll()
