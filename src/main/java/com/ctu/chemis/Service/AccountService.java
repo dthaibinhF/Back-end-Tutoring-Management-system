@@ -62,7 +62,9 @@ public class AccountService {
     }
 
     public List<AccountDTO> getAllAccounts() {
-        return accountRepository.findAll().stream().map(accountMapper::toAccountDTO).collect(Collectors.toList());
+        return accountRepository.findAll().stream()
+                .map(accountMapper::toAccountDTO)
+                .collect(Collectors.toList());
     }
 
     //PUT METHOD

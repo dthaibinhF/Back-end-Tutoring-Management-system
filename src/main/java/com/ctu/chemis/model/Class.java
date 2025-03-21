@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -28,5 +30,7 @@ public class Class {
     @JoinColumn(name = "grade")
     private Grade grade;
 
-
+    @ManyToMany(mappedBy = "classes",
+            fetch = FetchType.LAZY)
+    private List<PeriodTime> periodTimes;
 }

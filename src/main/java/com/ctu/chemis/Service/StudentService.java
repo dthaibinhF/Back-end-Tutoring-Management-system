@@ -38,7 +38,8 @@ public class StudentService {
         //set id to 0 to avoid id conflict
         student.setId(0);
         //save student to database
-        return studentMapper.toStudentDTO(studentRepository.save(student));
+        Student savedStudent = studentRepository.save(student);
+        return studentMapper.toStudentDTO(savedStudent);
     }
 
     public StudentDTO updateStudent(StudentDTO studentDTO, long studentId) {

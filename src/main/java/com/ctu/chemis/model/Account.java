@@ -47,7 +47,7 @@ public class Account {
     )
     private List<Authority> authorities;
 
-    @OneToOne(mappedBy = "account")
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private Student student;
 
 
