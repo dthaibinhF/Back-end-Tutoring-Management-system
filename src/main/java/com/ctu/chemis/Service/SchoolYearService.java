@@ -3,6 +3,7 @@ package com.ctu.chemis.Service;
 import com.ctu.chemis.DTO.SchoolYearDTO;
 import com.ctu.chemis.Repository.GradeRepository;
 import com.ctu.chemis.Repository.SchoolYearsRepository;
+import com.ctu.chemis.execption.NotFoundException;
 import com.ctu.chemis.mapper.SchoolYearMapper;
 import com.ctu.chemis.model.Grade;
 import com.ctu.chemis.model.SchoolYear;
@@ -33,7 +34,7 @@ public class SchoolYearService {
     public SchoolYearDTO getSchoolYearBy(long schoolYearId) {
         return schoolYearMapper.toSchoolYearDTO(
                 schoolYearsRepository.findById(schoolYearId).orElseThrow(
-                        () -> new RuntimeException("School Year not found"))
+                        () -> new NotFoundException("School Year not found"))
         );
     }
 
@@ -41,7 +42,7 @@ public class SchoolYearService {
         LocalDate currentDate = new Date(System.currentTimeMillis()).toLocalDate();
         return schoolYearMapper.toSchoolYearDTO(
                 schoolYearsRepository.findCurrentSchoolYear(currentDate).orElseThrow(
-                        () -> new RuntimeException("No school year found")
+                        () -> new NotFoundException("No school year found")
                 )
         );
     }

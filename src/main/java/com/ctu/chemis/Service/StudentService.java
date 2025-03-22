@@ -2,6 +2,7 @@ package com.ctu.chemis.Service;
 
 import com.ctu.chemis.DTO.StudentDTO;
 import com.ctu.chemis.Repository.StudentRepository;
+import com.ctu.chemis.execption.NotFoundException;
 import com.ctu.chemis.mapper.StudentMapper;
 import com.ctu.chemis.model.Student;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class StudentService {
     public StudentDTO getStudentBy(long studentId) {
         return studentMapper.toStudentDTO(
                 studentRepository.findById(studentId).orElseThrow(
-                        () -> new RuntimeException("Student not found"))
+                        () -> new NotFoundException("Student id not found - " + studentId))
         );
     }
 
@@ -45,11 +46,11 @@ public class StudentService {
     public StudentDTO updateStudent(StudentDTO studentDTO, long studentId) {
 
         Student student = studentRepository.findById(studentId).orElseThrow(
-                () -> new RuntimeException("Student id not found: " + studentId)
+                () -> new NotFoundException("Student id not found: " + studentId)
         );
 
         if (student.getId() != studentDTO.getId()) {
-            throw new RuntimeException("School id mismatch");
+            throw new NotFoundException("School id mismatch");
         }
 
         studentMapper.updateStudentFromDTO(student, studentDTO);

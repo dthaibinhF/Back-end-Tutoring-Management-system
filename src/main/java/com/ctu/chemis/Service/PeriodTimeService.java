@@ -2,6 +2,8 @@ package com.ctu.chemis.Service;
 
 import com.ctu.chemis.DTO.PeriodTimeDTO;
 import com.ctu.chemis.Repository.PeriodTimeRepository;
+import com.ctu.chemis.execption.MissMatchException;
+import com.ctu.chemis.execption.NotFoundException;
 import com.ctu.chemis.mapper.PeriodTimeMapper;
 import com.ctu.chemis.model.PeriodTime;
 import jakarta.transaction.Transactional;
@@ -29,17 +31,17 @@ public class PeriodTimeService {
     public PeriodTimeDTO getPeriodTimeBy(long periodTimeId) {
         return periodTimeMapper.toPeriodTimeDTO(
                 periodTimeRepository.findById(periodTimeId).orElseThrow(
-                        () -> new RuntimeException("Period Time not found"))
+                        () -> new NotFoundException("Period Time id not found - " + periodTimeId))
         );
     }
 
     @Transactional
     public PeriodTimeDTO updatePeriodTime(PeriodTimeDTO periodTimeDTO, long periodTimeId) {
         PeriodTime periodTime = periodTimeRepository.findById(periodTimeId).orElseThrow(
-                () -> new RuntimeException("Period Time id not found: " + periodTimeId)
+                () -> new NotFoundException("Period Time id not found: " + periodTimeId)
         );
         if (periodTime.getId() != periodTimeDTO.getId()) {
-            throw new RuntimeException("Period Time id mismatch");
+            throw new MissMatchException("Period Time id mismatch");
         }
         periodTimeMapper.updateFormDTO(periodTime, periodTimeDTO);
         return periodTimeMapper.toPeriodTimeDTO(periodTime);

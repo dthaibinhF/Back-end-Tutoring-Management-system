@@ -1,7 +1,6 @@
 package com.ctu.chemis.DTO;
 
 
-import com.ctu.chemis.model.PeriodTime;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -18,6 +17,5 @@ public class ClassDTO {
     String name;
     String type;
     GradeDTO grade;
-    List<PeriodTime> periodTimes;
-
+    List<PeriodTimeDTO> periodTimes;
 }

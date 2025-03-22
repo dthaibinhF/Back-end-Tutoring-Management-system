@@ -2,6 +2,7 @@ package com.ctu.chemis.Service;
 
 import com.ctu.chemis.DTO.AccountDetailsDTO;
 import com.ctu.chemis.Repository.AccountDetailsRepository;
+import com.ctu.chemis.execption.NotFoundException;
 import com.ctu.chemis.mapper.AccountDetailsMapper;
 import com.ctu.chemis.model.AccountDetails;
 import jakarta.transaction.Transactional;
@@ -22,7 +23,7 @@ public class AccountDetailsService {
     public AccountDetailsDTO getAccountDetailsBy(long accountDetailsId) {
         return accountDetailsMapper.toAccountDetailsDTO(
                 accountDetailsRepository.findById(accountDetailsId).orElseThrow(
-                        () -> new RuntimeException("Account Details not found"))
+                        () -> new NotFoundException("Account Details not found"))
         );
     }
 
@@ -36,11 +37,11 @@ public class AccountDetailsService {
     @Transactional
     public AccountDetailsDTO update(AccountDetailsDTO accountDetailsDTO, long accountDetailsId) {
         AccountDetails accountDetails = accountDetailsRepository.findById(accountDetailsId).orElseThrow(
-                () -> new RuntimeException("Account Details id not found: " + accountDetailsId)
+                () -> new NotFoundException("Account Details id not found: " + accountDetailsId)
         );
 
         if (accountDetailsDTO.getId() != accountDetails.getId()) {
-            throw new RuntimeException("Account Details id not match: " + accountDetailsId);
+            throw new NotFoundException("Account Details id not match: " + accountDetailsId);
         }
 
         accountDetailsMapper.updateAccountDetailsFromDTO(accountDetails, accountDetailsDTO);

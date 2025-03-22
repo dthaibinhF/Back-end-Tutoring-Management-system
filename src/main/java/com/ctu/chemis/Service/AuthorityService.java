@@ -2,6 +2,8 @@ package com.ctu.chemis.Service;
 
 import com.ctu.chemis.DTO.AuthorityDTO;
 import com.ctu.chemis.Repository.AuthorityRepository;
+import com.ctu.chemis.execption.MissMatchException;
+import com.ctu.chemis.execption.NotFoundException;
 import com.ctu.chemis.mapper.AuthorityMapper;
 import com.ctu.chemis.model.Authority;
 import jakarta.transaction.Transactional;
@@ -22,7 +24,7 @@ public class AuthorityService {
     public AuthorityDTO getAuthorityBy(long authorityId) {
         return authorityMapper.toAuthorityDTO(
                 authorityRepository.findById(authorityId).orElseThrow(
-                        () -> new RuntimeException("Account Details not found"))
+                        () -> new NotFoundException("Account Details id not found"))
         );
     }
 
@@ -36,11 +38,11 @@ public class AuthorityService {
     @Transactional
     public AuthorityDTO update(AuthorityDTO authorityDTO, long authorityId) {
         Authority authority = authorityRepository.findById(authorityId).orElseThrow(
-                () -> new RuntimeException("Account Details id not found: " + authorityId)
+                () -> new NotFoundException("Account Details id not found: " + authorityId)
         );
 
         if (authorityDTO.getId() != authority.getId()) {
-            throw new RuntimeException("Account Details id not match: " + authorityId);
+            throw new MissMatchException("Account Details id not match: " + authorityId);
         }
 
         authorityMapper.updateAccountDetailsFromDTO(authority, authorityDTO);

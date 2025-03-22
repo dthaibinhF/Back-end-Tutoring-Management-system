@@ -2,6 +2,7 @@ package com.ctu.chemis.Service;
 
 import com.ctu.chemis.DTO.AccountDTO;
 import com.ctu.chemis.Repository.AccountRepository;
+import com.ctu.chemis.execption.NotFoundException;
 import com.ctu.chemis.mapper.AccountMapper;
 import com.ctu.chemis.model.Account;
 import jakarta.transaction.Transactional;
@@ -56,7 +57,7 @@ public class AccountService {
     //GET METHOD
     public AccountDTO getAccountBy(long accountId) {
         Account account = accountRepository.findById(accountId).orElseThrow(
-                () -> new RuntimeException("Account not found - " + accountId)
+                () -> new NotFoundException("Account not found - " + accountId)
         );
         return accountMapper.toAccountDTO(account);
     }
@@ -71,7 +72,7 @@ public class AccountService {
     @Transactional
     public AccountDTO updateAccount(AccountDTO accountDTO, long accountId) {
         Account account = accountRepository.findById(accountId).orElseThrow(
-                () -> new RuntimeException("Account not found - " + accountId)
+                () -> new NotFoundException("Account not found - " + accountId)
         );
         //change the account details with mapper
         accountMapper.updateAccountFromDTO(account, accountDTO);
@@ -83,7 +84,7 @@ public class AccountService {
     @Transactional
     public void deleteAccount(long accountId) {
         Account account = accountRepository.findById(accountId).orElseThrow(
-                () -> new RuntimeException("Account not found - " + accountId)
+                () -> new NotFoundException("Account not found - " + accountId)
         );
         accountRepository.delete(account);
     }

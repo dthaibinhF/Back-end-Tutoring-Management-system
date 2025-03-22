@@ -2,6 +2,7 @@ package com.ctu.chemis.Service;
 
 import com.ctu.chemis.DTO.ScoreDTO;
 import com.ctu.chemis.Repository.ScoreRepository;
+import com.ctu.chemis.execption.NotFoundException;
 import com.ctu.chemis.mapper.ScoreMapper;
 import com.ctu.chemis.model.Score;
 import jakarta.transaction.Transactional;
@@ -26,7 +27,7 @@ public class ScoreService {
 
     public ScoreDTO getScoreBy(long scoreId) {
         Score score = scoreRepository.findById(scoreId).orElseThrow(
-                () -> new RuntimeException("Score not found"));
+                () -> new NotFoundException("Score id not found - " + scoreId));
         return scoreMapper.toScoreDTO(
                 score
         );
@@ -43,11 +44,11 @@ public class ScoreService {
     public ScoreDTO updateScore(ScoreDTO scoreDTO, long scoreId) {
 
         Score score = scoreRepository.findById(scoreId).orElseThrow(
-                () -> new RuntimeException("Score id not found: " + scoreId)
+                () -> new NotFoundException("Score id not found: " + scoreId)
         );
 
         if (score.getId() != scoreDTO.getId()) {
-            throw new RuntimeException("score id mismatch");
+            throw new NotFoundException("score id mismatch");
         }
 
         scoreMapper.updateScoreFromDTO(score, scoreDTO);
@@ -70,13 +71,13 @@ public class ScoreService {
     @Transactional
     public String deleteScore(long scoreId) {
         Score score = scoreRepository.findById(scoreId).orElseThrow(
-                () -> new RuntimeException("Score not found")
+                () -> new NotFoundException("Score not found")
         );
         if (score != null) {
             scoreRepository.deleteById(scoreId);
             return "Score with id: " + scoreId + " deleted successfully";
         } else {
-            throw new RuntimeException("Score not found");
+            throw new NotFoundException("Score not found");
         }
     }
 }

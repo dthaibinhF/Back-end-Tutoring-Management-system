@@ -33,6 +33,6 @@ public class PeriodTime {
     @JoinTable(name = "period_time_class",
             joinColumns = @JoinColumn(name = "period_time_id"),
             inverseJoinColumns = @JoinColumn(name = "class_id"))
-    private List<Class> classes;
+    private List<Classes> classes;
 
 }

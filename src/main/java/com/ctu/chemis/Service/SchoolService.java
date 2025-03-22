@@ -2,6 +2,8 @@ package com.ctu.chemis.Service;
 
 import com.ctu.chemis.DTO.SchoolDTO;
 import com.ctu.chemis.Repository.SchoolRepository;
+import com.ctu.chemis.execption.MissMatchException;
+import com.ctu.chemis.execption.NotFoundException;
 import com.ctu.chemis.mapper.SchoolMapper;
 import com.ctu.chemis.model.School;
 import jakarta.transaction.Transactional;
@@ -29,7 +31,7 @@ public class SchoolService {
     public SchoolDTO getSchoolById(Long id) {
         return schoolMapper.toSchoolDTO(
                 schoolRepository.findById(id).orElseThrow(
-                        () -> new RuntimeException("School not found"))
+                        () -> new NotFoundException("School not found"))
         );
     }
 
@@ -50,11 +52,11 @@ public class SchoolService {
     public SchoolDTO updateSchool(SchoolDTO schoolDTO, Long schoolId) {
 
         School school = schoolRepository.findById(schoolId).orElseThrow(
-                () -> new RuntimeException("School id not found: " + schoolId)
+                () -> new NotFoundException("School id not found: " + schoolId)
         );
 
         if (schoolDTO.getId() != school.getId()) {
-            throw new RuntimeException("School id mismatch");
+            throw new MissMatchException("School id mismatch");
         }
 
         schoolMapper.updateSchoolFromDTO(school, schoolDTO);

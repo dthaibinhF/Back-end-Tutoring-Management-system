@@ -3,6 +3,7 @@ package com.ctu.chemis.Service;
 import com.ctu.chemis.DTO.GradeDTO;
 import com.ctu.chemis.Repository.GradeRepository;
 import com.ctu.chemis.Repository.SchoolYearsRepository;
+import com.ctu.chemis.execption.NotFoundException;
 import com.ctu.chemis.mapper.GradeMapper;
 import com.ctu.chemis.model.Grade;
 import com.ctu.chemis.model.SchoolYear;
@@ -31,7 +32,7 @@ public class GradeService {
     public GradeDTO getGradeById(long gradeId) {
         return gradeMapper.toGradeDTO(
                 gradeRepository.findById(gradeId).orElseThrow(
-                        () -> new RuntimeException("Grade not found"))
+                        () -> new NotFoundException("Grade not found"))
         );
     }
 
