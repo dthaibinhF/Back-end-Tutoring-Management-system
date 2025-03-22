@@ -40,6 +40,10 @@ public class Student {
             fetch = FetchType.EAGER)
     private List<Score> scores;
 
+    @JoinColumn(name = "class_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Classes classes;
+
 }
 
 

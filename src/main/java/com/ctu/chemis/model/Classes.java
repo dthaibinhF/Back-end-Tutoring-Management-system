@@ -33,4 +33,9 @@ public class Classes {
     @ManyToMany(mappedBy = "classes",
             fetch = FetchType.LAZY)
     private List<PeriodTime> periodTimes;
+
+    @OneToMany(mappedBy = "classes",
+            fetch = FetchType.LAZY)
+    private List<Student> students;
+
 }
