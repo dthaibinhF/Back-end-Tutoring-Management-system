@@ -18,4 +18,5 @@ public class SalaryDTO {
     long id;
     LocalDate datePayAt;
     BigDecimal salary;
+    TeacherDTO teacher;
 }

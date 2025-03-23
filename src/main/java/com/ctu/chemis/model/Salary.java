@@ -23,7 +23,7 @@ public class Salary {
     @Column(name = "salary", nullable = false, precision = 15, scale = 4)
     private BigDecimal salary;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "teacher_id", nullable = false)
     private Teacher teacher;
 

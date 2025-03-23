@@ -5,10 +5,7 @@ import com.ctu.chemis.DTO.SalaryDTO;
 import com.ctu.chemis.Service.SalaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +15,11 @@ import java.util.List;
 public class SalaryController {
     private final SalaryService salaryService;
 
+    @PostMapping("/create")
+    public ResponseEntity<SalaryDTO> createSalary(@RequestBody SalaryDTO salaryDTO) {
+        return salaryService.createSalary(salaryDTO);
+    }
+
     @GetMapping("/all")
     public ResponseEntity<List<SalaryDTO>> getAllSalary() {
         return ResponseEntity.ok(salaryService.getAllSalary());
@@ -25,6 +27,16 @@ public class SalaryController {
 
     @GetMapping("/{salaryId}")
     public ResponseEntity<SalaryDTO> getSingleSalary(@PathVariable long salaryId) {
-        return ResponseEntity.ok(salaryService.getSingleSalary(salaryId));
+        return salaryService.getSingleSalary(salaryId);
+    }
+
+    @PutMapping("/{salaryId}")
+    public ResponseEntity<SalaryDTO> updateSalary(@RequestBody SalaryDTO salaryDTO, @PathVariable long salaryId) {
+        return salaryService.updateSalary(salaryDTO, salaryId);
+    }
+
+    @DeleteMapping("/{salaryId}")
+    public ResponseEntity<String> deleteSalary(@PathVariable long salaryId) {
+        return salaryService.deleteSalary(salaryId);
     }
 }
