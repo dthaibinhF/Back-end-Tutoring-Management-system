@@ -24,9 +24,10 @@ public class Classes {
     @Column(name = "type")
     private String type;
 
-    @ManyToOne(fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-                    CascadeType.REFRESH, CascadeType.DETACH})
+    @Column(name = "max_student")
+    private int maxStudent;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "grade")
     private Grade grade;
 

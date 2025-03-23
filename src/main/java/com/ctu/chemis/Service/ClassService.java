@@ -55,9 +55,16 @@ public class ClassService {
         try {
             classRepository.findById(classId);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Class not found");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Class id not found");
         }
         classRepository.deleteById(classId);
         return ResponseEntity.ok("Class deleted successfully");
+    }
+
+    public ClassDTO createClass(ClassDTO classDTO) {
+        Classes classes = classMapper.toClass(classDTO);
+        classes.setId(0);
+        Classes savedClass = classRepository.save(classes);
+        return classMapper.toClassDTO(savedClass);
     }
 }

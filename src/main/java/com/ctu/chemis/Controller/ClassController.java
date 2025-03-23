@@ -3,6 +3,7 @@ package com.ctu.chemis.Controller;
 import com.ctu.chemis.DTO.ClassDTO;
 import com.ctu.chemis.Service.ClassService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,16 @@ import java.util.List;
 public class ClassController {
 
     private final ClassService classService;
+
+    @PostMapping("/create")
+    public ResponseEntity<ClassDTO> createClass(@RequestBody ClassDTO classDTO) {
+        ClassDTO savedClass = classService.createClass(classDTO);
+
+        if (savedClass != null) {
+            return ResponseEntity.ok(savedClass);
+        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+    }
 
     @GetMapping("/all")
     public ResponseEntity<List<ClassDTO>> getClasses() {

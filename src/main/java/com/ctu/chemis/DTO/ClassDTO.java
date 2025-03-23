@@ -17,5 +17,6 @@ public class ClassDTO {
     String name;
     String type;
     GradeDTO grade;
+    int maxStudent;
     List<PeriodTimeDTO> periodTimes;
 }

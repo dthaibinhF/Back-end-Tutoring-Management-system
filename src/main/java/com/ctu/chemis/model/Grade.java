@@ -23,9 +23,7 @@ public class Grade {
     @Column(name = "grade")
     private int grade;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-                    CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "school_year_grade",
             joinColumns = @JoinColumn(name = "grade_id"),
             inverseJoinColumns = @JoinColumn(name = "school_year_id")

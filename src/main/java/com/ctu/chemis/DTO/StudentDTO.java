@@ -17,5 +17,5 @@ public class StudentDTO {
     AccountDTO account;
     SchoolDTO school;
     GradeDTO grade;
-    ClassDTO classDTO;
+    ClassDTO classes;
 }
