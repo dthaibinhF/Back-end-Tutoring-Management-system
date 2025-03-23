@@ -1,6 +1,7 @@
 package com.ctu.chemis.Controller;
 
 
+import com.ctu.chemis.Constant.Path;
 import com.ctu.chemis.DTO.AuthorityDTO;
 import com.ctu.chemis.Service.AuthorityService;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1/authority")
+@RequestMapping(Path.prefix + "/authority")
 public class AuthorityController {
     private final AuthorityService authorityService;
 

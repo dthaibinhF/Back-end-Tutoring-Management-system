@@ -50,6 +50,10 @@ public class Account {
     @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private Student student;
 
+    @OneToOne(mappedBy = "account",
+            fetch = FetchType.EAGER)
+    private Teacher teacher;
+
 
     @Override
     public String toString() {

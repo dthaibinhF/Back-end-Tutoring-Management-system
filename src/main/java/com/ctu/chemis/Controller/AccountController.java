@@ -1,5 +1,6 @@
 package com.ctu.chemis.Controller;
 
+import com.ctu.chemis.Constant.Path;
 import com.ctu.chemis.DTO.AccountDTO;
 import com.ctu.chemis.Service.AccountService;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1/account")
+@RequestMapping(Path.prefix + "/account")
 public class AccountController {
 
     private final AccountService accountService;

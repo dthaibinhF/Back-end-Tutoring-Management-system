@@ -1,5 +1,6 @@
 package com.ctu.chemis.Controller;
 
+import com.ctu.chemis.Constant.Path;
 import com.ctu.chemis.DTO.ClassDTO;
 import com.ctu.chemis.Service.ClassService;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/class")
+@RequestMapping(Path.prefix + "/class")
 @RequiredArgsConstructor
 public class ClassController {
 

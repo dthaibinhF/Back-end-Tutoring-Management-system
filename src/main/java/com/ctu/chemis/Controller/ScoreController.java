@@ -1,5 +1,6 @@
 package com.ctu.chemis.Controller;
 
+import com.ctu.chemis.Constant.Path;
 import com.ctu.chemis.DTO.ScoreDTO;
 import com.ctu.chemis.Service.ScoreService;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/score")
+@RequestMapping(Path.prefix + "/score")
 @RequiredArgsConstructor
 public class ScoreController {
 

@@ -1,5 +1,6 @@
 package com.ctu.chemis.Controller;
 
+import com.ctu.chemis.Constant.Path;
 import com.ctu.chemis.DTO.PeriodTimeDTO;
 import com.ctu.chemis.Service.PeriodTimeService;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/period-time")
+@RequestMapping(Path.prefix + "/period-time")
 @RequiredArgsConstructor
 public class PeriodTimeController {
     private final PeriodTimeService periodTimeService;

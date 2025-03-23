@@ -1,5 +1,6 @@
 package com.ctu.chemis.Controller;
 
+import com.ctu.chemis.Constant.Path;
 import com.ctu.chemis.DTO.GradeDTO;
 import com.ctu.chemis.Service.GradeService;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/grade")
+@RequestMapping(Path.prefix + "/grade")
 @RequiredArgsConstructor
 public class GradeController {
 
