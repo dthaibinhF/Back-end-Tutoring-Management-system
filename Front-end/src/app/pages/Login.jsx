@@ -2,7 +2,7 @@ import React from 'react';
 import {Col, Row} from 'antd';
 import SignInCard from "../components/SignInCard.jsx";
 
-import '../css/pages/Login.css'
+import '../../assets/css/pages/Login.css'
 import LoginContent from "../components/LoginContent.jsx";
 
 const Login = () => {
