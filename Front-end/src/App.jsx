@@ -1,32 +1,17 @@
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {RouterProvider, Switch, Route  } from "react-router-dom";
 import {Login, HomeLayout, Landing, Dashboard} from "./app/pages/index.js";
-
-const router = createBrowserRouter(
-    [
-        {
-            path: '/',
-            element: <HomeLayout/>,
-            children: [
-                {
-                  index: true,
-                  element: <Landing/>
-                },
-                {
-                    path: 'login',
-                    element: <Login/>
-                },
-                {
-                    path: 'dashboard',
-                    element: <Dashboard/>
-                }
-            ]
-        }
-    ]
-)
+import router from "./app/router/route.js";
+import {useState} from "react";
 
 function App() {
+    const [isAuthentication, setIsAuthentication] = useState(false);
+    if (isAuthentication) {
+        return (
+            <RouterProvider router={router}/>
+        )
+    }
     return (
-        <RouterProvider router={router}/>
+        <Switch/>
     )
 }
 

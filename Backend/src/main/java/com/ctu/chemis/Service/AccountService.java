@@ -26,14 +26,18 @@ public class AccountService {
 
     private final AccountMapper accountMapper;
 
+    public AccountDTO findByEmail(String email) {
+        return accountMapper.toAccountDTO(accountRepository.findByEmail(email).orElse(null));
+    }
+
     /*Create user
      * @PasswordEncoder
      * */
     public ResponseEntity<String> createAccount(AccountDTO accountDTO) {
         Account account = accountMapper.toAccount(accountDTO);
         try {
-            // also just in case they pass an id in JSON ... set id to 0
-            // this is to force a save of new item ... instead of update
+            // also, in case they pass an id in JSON set id to 0,
+            // this is to force a save of new item instead of update
             account.setId(0);
             //hash password
             String hashPwd = passwordEncoder.encode(account.getPassword());

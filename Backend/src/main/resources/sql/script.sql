@@ -20,7 +20,7 @@
 --
 
 DROP TABLE IF EXISTS `account`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET @saved_cs_client = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `account` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -43,7 +43,13 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES (1,'Đặng Thái Bình','dthaibinh03@gmail.com','0939464077','{noop}Dthaibinh@1234',1,'2025-02-10'),(2,'Donnie Gottlieb','nhut@gmail.com','0123456780','{bcrypt}$2a$12$KBdErJidVwMvzqN/mlQQVurMueux6oaT0t1KXQkfFTn98QYDVP6Jm',2,'2025-02-20'),(3,'Phan Tấn Phát','phat@gmail.com','0123456789','{bcrypt}$2a$12$aWEDx6JpvXScPRVk7cTxkeKh4e5qxQsk91wGtS.KVS2/L0/AcU.B2',3,'2025-02-20'),(4,'Bùi Gia Mỹ','my@gmail.com','0987654321','{bcrypt}$2a$12$HRPpgmQ2SuIbf1HfJEMXGeSlmHQ7SgucyVTJSpZXJXYT6PMFlJJES',4,'2025-02-20'),(5,'Nguyễn Hoàng Trung','trung@gmail.com','0333098311','{bcrypt}$2a$12$HRPpgmQ2SuIbf1HfJEMXGeSlmHQ7SgucyVTJSpZXJXYT6PMFlJJES',5,'2025-02-21'),(6,'Beverly Breitenberg','Daisy.Stracke40@example.net','620-780-6558','{bcrypt}$2a$10$DG8BSVpeTX5lrMO3LQpWp.Z40QNzam4anwoQwF9Zht4iyklY3uvZq',6,'2025-03-17'),(7,'Elbert Wisoky','Jeanette85@example.org','878-367-8628','{bcrypt}$2a$10$PnO1MwAxTfNeVc8Tq9Z4MeAZNnwjXKX4DMHv67ktD/2S6Q4JIywwW',9,'2025-03-23');
+INSERT INTO `account` VALUES (1,'Đặng Thái Bình','dthaibinh03@gmail.com','0939464077','{noop}Dthaibinh@1234',1,'2025-02-10'),
+                             (2,'Donnie Gottlieb','nhut@gmail.com','0123456780','{bcrypt}$2a$12$KBdErJidVwMvzqN/mlQQVurMueux6oaT0t1KXQkfFTn98QYDVP6Jm',2,'2025-02-20'),
+                             (3,'Phan Tấn Phát','phat@gmail.com','0123456789','{bcrypt}$2a$12$aWEDx6JpvXScPRVk7cTxkeKh4e5qxQsk91wGtS.KVS2/L0/AcU.B2',3,'2025-02-20'),
+                             (4,'Bùi Gia Mỹ','my@gmail.com','0987654321','{bcrypt}$2a$12$HRPpgmQ2SuIbf1HfJEMXGeSlmHQ7SgucyVTJSpZXJXYT6PMFlJJES',4,'2025-02-20'),
+                             (5,'Nguyễn Hoàng Trung','trung@gmail.com','0333098311','{bcrypt}$2a$12$HRPpgmQ2SuIbf1HfJEMXGeSlmHQ7SgucyVTJSpZXJXYT6PMFlJJES',5,'2025-02-21'),
+                             (6,'Beverly Breitenberg','Daisy.Stracke40@example.net','620-780-6558','{bcrypt}$2a$10$DG8BSVpeTX5lrMO3LQpWp.Z40QNzam4anwoQwF9Zht4iyklY3uvZq',6,'2025-03-17'),
+                             (7,'Elbert Wisoky','Jeanette85@example.org','878-367-8628','{bcrypt}$2a$10$PnO1MwAxTfNeVc8Tq9Z4MeAZNnwjXKX4DMHv67ktD/2S6Q4JIywwW',9,'2025-03-23');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,7 +58,7 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `account_authority`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET @saved_cs_client = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `account_authority` (
   `account_id` int NOT NULL,

@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service /*during start up, spring will create a bean of this class since it implementing the UserDetails class*/
-@RequiredArgsConstructor /*Lombok create a constructor with required field --> don't have to mention @Autorwired*/
+@Service /*during startup, spring will create a bean of this class since it implementing the UserDetails class*/
+@RequiredArgsConstructor /*Lombok create a constructor with required field --> don't have to mention it @Autowired*/
 public class ChemisUserDetailsService implements UserDetailsService {
 
     private final AccountRepository accountRepository;

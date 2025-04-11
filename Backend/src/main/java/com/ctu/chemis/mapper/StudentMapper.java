@@ -11,6 +11,8 @@ import org.mapstruct.MappingTarget;
 public interface StudentMapper {
     @Mapping(target = "classes", source = "classes")
     StudentDTO toStudentDTO(Student student);
+
     Student toStudent(StudentDTO studentDTO);
+
     void updateStudentFromDTO(@MappingTarget Student student, StudentDTO studentDTO);
 }
